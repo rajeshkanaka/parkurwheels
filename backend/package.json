@@ -1,0 +1,26 @@
+{
+  "name": "parking",
+  "version": "1.0.0",
+  "description": "A parking app backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.3",
+    "joi": "^17.6.0",
+    "knex": "^1.0.6",
+    "mongodb": "^4.5.0",
+    "mongoose": "^6.2.10",
+    "nodemon": "^2.0.15",
+    "pg": "^8.7.3",
+    "sqlite3": "^5.0.2",
+    "uuid": "^8.3.2"
+  }
+}
