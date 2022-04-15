@@ -5,13 +5,15 @@ import AppButton from "../components/AppButton";
 function WelcomeScreen(props) {
   return (
     <ImageBackground
-      blurRadius={10}
+      blurRadius={0}
       style={styles.background}
       source={require("../assets/background.jpg")}
     >
       <View style={styles.logoContainer}>
-        <Image style={styles.logo} source={require("../assets/logo-red.png")} />
-        <Text style={styles.tagline}>Sell What You Don't Need</Text>
+        <Image
+          style={styles.logo}
+          source={require("../assets/LogoParking.jpg")}
+        />
       </View>
       <View style={styles.buttonsContainer}>
         <AppButton title="Login" />
