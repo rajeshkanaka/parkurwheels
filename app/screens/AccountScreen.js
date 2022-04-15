@@ -18,7 +18,7 @@ const menuItems = [
   {
     title: "My Transactions",
     icon: {
-      name: "bank",
+      name: "dollar-sign",
       backgroundColor: colors.secondary,
     },
   },
