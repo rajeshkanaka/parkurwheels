@@ -7,7 +7,7 @@ const pool = require("../db/db");
 const router = express.Router()
 
 let salt;
-bycript.genSalt(10, (err, st) => {
+bycript.genSalt(10,(err,st)=>{
     salt = st
 })
 
