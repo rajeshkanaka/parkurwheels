@@ -16,25 +16,22 @@ router
     .post('/', async (req, res) => {
         let status, resp = []
 
-        const { uuid, email, mobile, password } = req.body
+        const {useremail, userphone, password } = req.body
         try {
             let user;
-            if (email) {
-                user = await pool.query("SELECT * FROM users WHERE email=$1", [email])
+            if (useremail) {
+                user = await pool.query("SELECT * FROM user_account WHERE useremail=$1", [useremail])
             }
-            if (uuid) {
-                user = await pool.query("SELECT * FROM users WHERE uuid=$1", [uuid])
-            }
-            if (mobile) {
-                user = await pool.query("SELECT * FROM users WHERE mobile=$1", [mobile])
+            if (userphone) {
+                user = await pool.query("SELECT * FROM user_account WHERE userphone=$1", [userphone])
             }
 
             if (user.rowCount > 0) {
-                passHashDb = user.rows[0].password_hash
+                passHashDb = user.rows[0].password
                 let compPass = await bycript.compare(password, passHashDb)
                 if (compPass) {
                     let token = uuidv4()
-                    await pool.query("INSERT INTO tokens (token,userid) VALUES ($1,$2)", [token, user.rows[0].uuid]);
+                    await pool.query("INSERT INTO tokens (token,userid) VALUES ($1,$2)", [token, user.rows[0].userid]);
                     status = 200
                     resp = {
                         status: 200,
@@ -72,16 +69,14 @@ router
     })
     .post('/create-account', async (req, res) => {
 
-        const { name, email, mobile, password } = req.body
-        const userId = uuidv4()
+        const { username, useremail, userphone, password } = req.body
         const salt = await bycript.genSalt(10);
         const passHash = await bycript.hash(password, salt);
         let resp = []
         let status
         try {
-            console.log(email)
-            let user = await pool.query("SELECT * FROM users WHERE email=$1 OR mobile=$2",
-                [email, mobile])
+            let user = await pool.query("SELECT * FROM user_account WHERE useremail=$1 OR userphone=$2",
+                [useremail, userphone])
             if (user.rowCount > 0) {
                 status = 409;
                 resp = {
@@ -90,19 +85,17 @@ router
                     message: "User already exist with this details"
                 }
             } else {
-                let uuid = uuidv4()
-                let newUser = await pool.query("INSERT INTO users (uuid,email,name,mobile,password_hash) VALUES($1,$2,$3,$4,$5)",
-                    [uuid, email, name, mobile, passHash])
+                let newUser = await pool.query("INSERT INTO user_account (useremail,username,userphone,password) VALUES($1,$2,$3,$4)",
+                    [useremail, username, userphone, passHash])
                 status = 201;
                 resp = {
                     status: 201,
                     success: true,
                     message: "Signup successful",
                     data: {
-                        uuid,
-                        email,
-                        name,
-                        mobile
+                       username,
+                       useremail,
+                       userphone
                     }
                 }
             }
