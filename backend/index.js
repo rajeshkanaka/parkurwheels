@@ -6,8 +6,10 @@ const cors = require("cors")
 app.use(bodyParser.json())
 const parkings = require('./routes/parkings')
 const login = require('./routes/login')
+const stct = require('./routes/cityState')
 app.use('/parking', parkings)
 app.use('/login', login)
+app.use('/stct', stct)
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
