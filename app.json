@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "DoneWithIt",
-    "slug": "DoneWithIt",
+    "name": "parkurwheels",
+    "slug": "parkurwheels",
     "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
     "orientation": "portrait",
@@ -18,6 +18,6 @@
     "ios": {
       "supportsTablet": true
     },
-    "description": "A marketplace for selling the stuff you don't need anymore."
+    "description": "Lets find hassle free Parking spot."
   }
 }
