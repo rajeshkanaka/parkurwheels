@@ -1,7 +1,6 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { StyleSheet, Image } from "react-native";
 import * as Yup from "yup";
-import jwtDecode from "jwt-decode";
 
 import Screen from "../components/Screen";
 import {
@@ -12,8 +11,6 @@ import {
 } from "../components/forms";
 import authApi from "../api/auth";
 import useAuth from "../auth/useAuth";
-//import { useContext } from "react/cjs/react.production.min";
-import AuthContext from "../auth/context";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required().email().label("Email"),
@@ -21,25 +18,19 @@ const validationSchema = Yup.object().shape({
 });
 
 function LoginScreen(props) {
-  //const auth = useAuth();
-  const authContext = useContext(AuthContext);
+  const auth = useAuth();
   const [loginFailed, setLoginFailed] = useState(false);
 
   const handleSubmit = async ({ email, password }) => {
     const result = await authApi.login(email, password);
     if (!result.ok) return setLoginFailed(true);
     setLoginFailed(false);
-    const user = jwtDecode(result.data);
-    authContext.setUser(user);
-    //auth.logIn(result.data);
+    auth.logIn(result.data);
   };
 
   return (
     <Screen style={styles.container}>
-      <Image
-        style={styles.logo}
-        source={require("../assets/LogoParking.jpg")}
-      />
+      <Image style={styles.logo} source={require("../assets/logo-red.png")} />
 
       <Form
         initialValues={{ email: "", password: "" }}
