@@ -20,7 +20,7 @@ const menuItems = [
   {
     title: "My Transactions",
     icon: {
-      name: "dollar-sign",
+      name: "table-edit",
       backgroundColor: colors.secondary,
     },
     targetScreen: routes.MESSAGES,

@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
+import AuthContext from "../auth/context";
 
 import Screen from "../components/Screen";
 import {
@@ -11,20 +12,21 @@ import {
 const initialMessages = [
   {
     id: 1,
-    title: "Mosh Hamedani",
-    description: "Hey! Is this item still available?",
+    title: "",
+    description: "Deccan Parking booked from 2 pm to 4 pm, Paid 40 Rupees",
     image: require("../assets/mosh.jpg"),
   },
   {
     id: 2,
-    title: "Mosh Hamedani",
+    title: "",
     description:
-      "I'm interested in this item. When will you be able to post it?",
+      "Bhandarkar Road Parking booked from 6 pm to 8 pm, Paid 40 Rupees",
     image: require("../assets/mosh.jpg"),
   },
 ];
 
 function MessagesScreen(props) {
+  const { user } = useContext(AuthContext);
   const [messages, setMessages] = useState(initialMessages);
   const [refreshing, setRefreshing] = useState(false);
 
@@ -40,9 +42,9 @@ function MessagesScreen(props) {
         keyExtractor={(message) => message.id.toString()}
         renderItem={({ item }) => (
           <ListItem
-            title={item.title}
+            title={user.name + " at " + new Date().toLocaleString()}
             subTitle={item.description}
-            image={item.image}
+            //image={item.image}
             onPress={() => console.log("Message selected", item)}
             renderRightActions={() => (
               <ListItemDeleteAction onPress={() => handleDelete(item)} />
@@ -57,7 +59,7 @@ function MessagesScreen(props) {
               id: 2,
               title: "T2",
               description: "D2",
-              image: require("../assets/mosh.jpg"),
+              //image: require("../assets/mosh.jpg"),
             },
           ]);
         }}

@@ -1,6 +1,5 @@
-import React, { useState, useContext } from "react";
+import React from "react";
 import { View, StyleSheet } from "react-native";
-import AuthContext from "../auth/context";
 import { Image } from "react-native-expo-image-cache";
 
 import colors from "../config/colors";
@@ -8,7 +7,6 @@ import ListItem from "../components/lists/ListItem";
 import Text from "../components/Text";
 
 function ListingDetailsScreen({ route }) {
-  const { user } = useContext(AuthContext);
   const listing = route.params;
 
   return (
@@ -24,8 +22,8 @@ function ListingDetailsScreen({ route }) {
         <Text style={styles.price}>${listing.price}</Text>
         <View style={styles.userContainer}>
           <ListItem
-            image={require("../assets/rajesh.jpg")}
-            title={user.name}
+            image={require("../assets/mosh.jpg")}
+            title="Mosh Hamedani"
             subTitle="5 Listings"
           />
         </View>
