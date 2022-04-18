@@ -21,12 +21,15 @@ function ListingDetailsScreen({ route }) {
       />
       <View style={styles.detailsContainer}>
         <Text style={styles.title}>{listing.title}</Text>
-        <Text style={styles.price}>${listing.price}</Text>
+        <Text style={styles.price}>Rs.{listing.price} Per Hr</Text>
+        <Text style={styles.price}>
+          12 Slots avaialable, 2 Two Wheeler, 3 Small Car, 5 Sedan, 2 SUV
+        </Text>
         <View style={styles.userContainer}>
           <ListItem
             image={require("../assets/rajesh.jpg")}
             title={user.name}
-            subTitle="5 Listings"
+            subTitle="Go ahead with booking "
           />
         </View>
       </View>
