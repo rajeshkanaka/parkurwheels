@@ -1,18 +1,20 @@
 import React, { useState, useContext } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, ScrollView } from "react-native";
 import AuthContext from "../auth/context";
 import { Image } from "react-native-expo-image-cache";
 
 import colors from "../config/colors";
 import ListItem from "../components/lists/ListItem";
 import Text from "../components/Text";
+import routes from "../navigation/routes";
 
-function ListingDetailsScreen({ route }) {
+function ListingDetailsScreen({ route, navigation }) {
   const { user } = useContext(AuthContext);
   const listing = route.params;
 
   return (
     <View>
+      <ScrollView>
       <Image
         style={styles.image}
         preview={{ uri: listing.images[0].thumbnailUrl }}
@@ -30,9 +32,11 @@ function ListingDetailsScreen({ route }) {
             image={require("../assets/rajesh.jpg")}
             title={user.name}
             subTitle="Go ahead with booking "
+            onPress={() => navigation.navigate(routes.SPOT_BOOKING)}
           />
         </View>
       </View>
+      </ScrollView>
     </View>
   );
 }

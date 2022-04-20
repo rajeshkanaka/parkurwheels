@@ -4,4 +4,7 @@ export default Object.freeze({
   LOGIN: "Login",
   MESSAGES: "Messages",
   REGISTER: "Register",
+  BOOKING: "Booking",
+  LISTINGS: "Listings",
+  SPOT_BOOKING: "SpotBooking",
 });

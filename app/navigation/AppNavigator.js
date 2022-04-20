@@ -13,12 +13,13 @@ const Tab = createBottomTabNavigator();
 const AppNavigator = () => (
   <Tab.Navigator>
     <Tab.Screen
-      name="Feed"
-      component={FeedNavigator}
+      name="Account"
+      component={AccountNavigator}
       options={{
         tabBarIcon: ({ color, size }) => (
-          <MaterialCommunityIcons name="home" color={color} size={size} />
+          <MaterialCommunityIcons name="account" color={color} size={size} />
         ),
+        headerShown:false,
       }}
     />
     <Tab.Screen
@@ -39,7 +40,16 @@ const AppNavigator = () => (
         ),
       })}
     />
-    <Tab.Screen
+     <Tab.Screen
+      name="Feed"
+      component={FeedNavigator}
+      options={{
+        tabBarIcon: ({ color, size }) => (
+          <MaterialCommunityIcons name="home" color={color} size={size} />
+        ),
+      }}
+    />
+    {/* <Tab.Screen
       name="Account"
       component={AccountNavigator}
       options={{
@@ -47,7 +57,7 @@ const AppNavigator = () => (
           <MaterialCommunityIcons name="account" color={color} size={size} />
         ),
       }}
-    />
+    /> */}
   </Tab.Navigator>
 );
 

@@ -7,6 +7,9 @@ import Icon from "../components/Icon";
 import routes from "../navigation/routes";
 import Screen from "../components/Screen";
 import AuthContext from "../auth/context";
+// import { openDatabase } from 'react-native-sqlite-storage';
+
+// const db = openDatabase({ name: 'ParkingDatabase.db' });
 
 const menuItems = [
   {
@@ -15,7 +18,7 @@ const menuItems = [
       name: "format-list-bulleted",
       backgroundColor: colors.primary,
     },
-    targetScreen: routes.LISTING_DETAILS,
+    targetScreen: routes.BOOKING,
   },
   {
     title: "My Transactions",
@@ -29,6 +32,25 @@ const menuItems = [
 
 function AccountScreen({ navigation }) {
   const { user, setUser } = useContext(AuthContext);
+
+  // useEffect(() => {
+  //   db.transaction(function (txn) {
+  //     txn.executeSql(
+  //       "SELECT name FROM sqlite_master WHERE type='table' AND name='booking_details'",
+  //       [],
+  //       function (tx, res) {
+  //         console.log('item:', res.rows.length);
+  //         if (res.rows.length == 0) {
+  //           txn.executeSql(
+  //             'CREATE TABLE IF NOT EXISTS booking_details(mesaage_id INTEGER PRIMARY KEY AUTOINCREMENT, title VARCHAR(50), description VARCHAR(255), image VARCHAR(255))',
+  //             []
+  //           );
+  //         }
+  //       }
+  //     );
+  //   });
+  // }, []);
+
   return (
     <Screen style={styles.screen}>
       <View style={styles.container}>
