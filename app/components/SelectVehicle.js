@@ -4,7 +4,7 @@ import Carousel from 'react-native-snap-carousel';
 import VehicleData from "../config/VehicleData";
 import colors from "../config/colors";
 
-export default function SelectVehicle() {
+export default function SelectVehicle({setSelectedVihicle}) {
 
     const [slideIndex, setSlideIndex] = useState(0);
     const [isPressed, setIsPressed] = useState();
@@ -14,7 +14,7 @@ export default function SelectVehicle() {
             <View style={styles.slide}>
                 <Image style={styles.vehicleImage} source={item.image} />
                 <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#5C55B9' }}>{item.name}</Text>
-                <TouchableOpacity style={isPressed == index ? styles.vehicleSelectPressButton : styles.vehicleSelectNormalButton} onPress={() => { setIsPressed(index) }} >
+                <TouchableOpacity style={isPressed == index ? styles.vehicleSelectPressButton : styles.vehicleSelectNormalButton} onPress={() => { setIsPressed(index); setSelectedVihicle(item.name) }} >
                     <Text style={isPressed == index ? { fontSize: 20, color: colors.white, } : { fontSize: 20, color: colors.black, }}>{'<<'}</Text>
                 </TouchableOpacity>
             </View>

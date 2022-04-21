@@ -1,12 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { View, TouchableOpacity, StyleSheet, Text, Image } from 'react-native';
 import SelectDuraion from "../components/SelectDuration";
-import ModalView from "../components/Modal";
+import ViewBookingDetails from "../components/ViewBookingDetails";
 import colors from "../config/colors";
 
-function SpotBookingScreen() {
+function SpotBookingScreen({route}) {
 
     const [modalVisible, setModalVisible] = useState(false);
+    const [bookingDetails, setBookingDetails] = useState(route.params);
+    const [hrs, setHrs] = useState(0);
+
+    useEffect(() => {
+        let details = bookingDetails;
+        details["total"] = details["rate"] * hrs;
+        setBookingDetails(details);
+      }, [hrs]);
+
     const [spotArrayLeft, setSpotArrayLeft] = useState([['a1', 1, 'a3',],
     [1, 1, 'b3',],
     ['c1', 'c2', 'c3',]]);
@@ -18,7 +27,7 @@ function SpotBookingScreen() {
 
             <View>
                 <View style={styles.centeredView}>
-                    <SelectDuraion />
+                    <SelectDuraion setHrs={setHrs} />
 
                     <View style={styles.spotView}>
                         <Text style={styles.modalText}>12 Spots available</Text>
@@ -66,7 +75,7 @@ function SpotBookingScreen() {
                             </View>
                         </View>
                     </View>
-                    <ModalView setModalVisible={setModalVisible} modalVisible={modalVisible} />
+                    <ViewBookingDetails bookingDetails={bookingDetails} setModalVisible={setModalVisible} modalVisible={modalVisible} />
                     <TouchableOpacity
                             style={[styles.confirmButton, { backgroundColor: colors['secondary'] }]}
                             onPress={() => setModalVisible(true)}

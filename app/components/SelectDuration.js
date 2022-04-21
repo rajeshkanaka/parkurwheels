@@ -3,7 +3,7 @@ import Slider from '@react-native-community/slider';
 import colors from '../config/colors';
 import { useState } from 'react';
 
-export default function SelectDuraion() {
+export default function SelectDuraion({setHrs}) {
 
     const [value, setValue] = useState(0);
     const [selectedTime, setSelectedTime] = useState(new Date());
@@ -18,7 +18,7 @@ export default function SelectDuraion() {
                 minimumTrackTintColor={colors.primary}
                 maximumTrackTintColor={colors.secondary}
                 step={1}
-                onValueChange={(value) => setValue(value)}
+                onValueChange={(value) => {setValue(value); setHrs(value)}}
             />
             <Text style={{ marginLeft: 10, left: value * 10, color: '#5C55B9' }}>
                 {value} hr

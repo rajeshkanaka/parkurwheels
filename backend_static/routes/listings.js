@@ -36,7 +36,8 @@ const validateCategoryId = (req, res, next) => {
 };
 
 router.get("/", (req, res) => {
-  const listings = store.getListings();
+  console.log(req.query['area'])
+  const listings = store.getListings(req.query['area']);
   const resources = listings.map(listingMapper);
   res.send(resources);
 });

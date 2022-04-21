@@ -10,7 +10,7 @@ import routes from "../navigation/routes";
 
 function ListingDetailsScreen({ route, navigation }) {
   const { user } = useContext(AuthContext);
-  const listing = route.params;
+  const listing = route.params.item;
 
   return (
     <View>
@@ -23,7 +23,7 @@ function ListingDetailsScreen({ route, navigation }) {
       />
       <View style={styles.detailsContainer}>
         <Text style={styles.title}>{listing.title}</Text>
-        <Text style={styles.price}>Rs.{listing.price} Per Hr</Text>
+        <Text style={styles.price}>Rs.{route.params.price} Per Hr</Text>
         <Text style={styles.price}>
           12 Slots avaialable, 2 Two Wheeler, 3 Small Car, 5 Sedan, 2 SUV
         </Text>
@@ -32,7 +32,7 @@ function ListingDetailsScreen({ route, navigation }) {
             image={require("../assets/rajesh.jpg")}
             title={user.name}
             subTitle="Go ahead with booking "
-            onPress={() => navigation.navigate(routes.SPOT_BOOKING)}
+            onPress={() => navigation.navigate(routes.SPOT_BOOKING, {parkingPlace:listing.title, rate:route.params.price, selectedVehicle:route.params.selectedVehicle })}
           />
         </View>
       </View>

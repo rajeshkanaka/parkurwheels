@@ -2,14 +2,14 @@ import { Modal, View, TouchableOpacity, StyleSheet, Text, Image } from 'react-na
 import colors from "../config/colors";
 import ActivityIndicator from "../components/ActivityIndicator";
 
-function ModalComponent({ modalVisible, setModalVisible }) {
+function ModalComponent({ successModal, setSuccessModal }) {
 
     return (
         <View style={styles.centeredView}>
             <Modal
                 animationType="slide"
                 transparent={true}
-                visible={modalVisible}
+                visible={successModal}
             >
                 <View style={styles.centeredView}>
                     <View style={styles.modalView}>
@@ -17,9 +17,9 @@ function ModalComponent({ modalVisible, setModalVisible }) {
                         <ActivityIndicator image={require("../assets/animations/done.json")} visible={true}/>
                         <TouchableOpacity
                             style={styles.confirmButton}
-                            onPress={() => setModalVisible(!modalVisible)}
+                            onPress={() => setSuccessModal(!successModal)}
                         >
-                            <Text style={styles.buttonText}>Done</Text>
+                            <Text style={styles.buttonText}>Show on map</Text>
                         </TouchableOpacity>
 
                     </View>

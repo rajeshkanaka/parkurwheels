@@ -4,18 +4,22 @@ import SelectArea from "../components/SelectArea";
 import SelectVehicle from "../components/SelectVehicle";
 import Button from "../components/Button";
 import routes from "../navigation/routes";
+import { useState } from 'react';
 
 function BookingScreen({ navigation }) {
+
+    const [area, setSelectedArea] = useState();
+    const [selectedVehicle, setSelectedVihicle] = useState();
 
   return (
     <View style={styles.container}>
       <ScrollView>
-        <SelectArea />
-        <SelectVehicle />
+        <SelectArea setSelectedArea={setSelectedArea} />
+        <SelectVehicle setSelectedVihicle={setSelectedVihicle} />
         <Button
           title="Book Spot"
           color="secondary"
-          onPress={() => navigation.navigate(routes.LISTINGS)}
+          onPress={() => navigation.navigate(routes.LISTINGS, {area,selectedVehicle})}
         />
       </ScrollView>
     </View>

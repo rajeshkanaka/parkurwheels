@@ -11,7 +11,7 @@ import Screen from "../components/Screen";
 import AppText from "../components/Text";
 import useApi from "../hooks/useApi";
 
-function ListingsScreen({ navigation }) {
+function ListingsScreen({ route, navigation }) {
   //const getListingsApi = useApi(listingsApi.getListings);
   const [listings, setListings] = useState([]);
 
@@ -20,7 +20,8 @@ function ListingsScreen({ navigation }) {
   }, []);
 
   const loadListings = async () => {
-    const response = await listingsApi.getListings();
+    console.log("selected area:",route.params)
+    const response = await listingsApi.getListings(route.params.area);
     console.log("Response is : ", response.data);
     setListings(response.data);
   };
@@ -33,9 +34,9 @@ function ListingsScreen({ navigation }) {
         renderItem={({ item }) => (
           <Card
             title={item.title}
-            subTitle={"Rs." + item.price + " Per Hour"}
+            subTitle={"Rs." + item.price[route.params.selectedVehicle] + " Per Hour"}
             imageUrl={item.images[0].url}
-            onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
+            onPress={() => navigation.navigate(routes.LISTING_DETAILS, {item , price:item.price[route.params.selectedVehicle], selectedVehicle:route.params.selectedVehicle})}
           />
         )}
       />

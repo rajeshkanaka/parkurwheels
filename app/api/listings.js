@@ -2,7 +2,7 @@ import client from "./client";
 
 const endpoint = "/listings";
 
-const getListings = () => client.get(endpoint);
+const getListings = (area) => client.get(`${endpoint}?area=${area}`);
 
 export const addListing = (listing, onUploadProgress) => {
   const data = new FormData();

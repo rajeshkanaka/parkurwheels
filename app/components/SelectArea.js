@@ -4,7 +4,7 @@ import SelectDropdown from 'react-native-select-dropdown'
 import colors from '../config/colors';
 import LocationData from '../config/LocationData';
 
-export default function SelectArea() {
+export default function SelectArea({setSelectedArea}) {
 
     const [cities, setCities] = useState([]);
     const [cityObject, setCityObject] = useState([]);
@@ -68,6 +68,7 @@ export default function SelectArea() {
                     buttonTextStyle={styles.dropDownButtonTextStyle}
                     ref={dropdownRefArea}
                     onSelect={(selectedItem, index) => {
+                        setSelectedArea(selectedItem)
                         console.log(selectedItem)
                     }}
                     buttonTextAfterSelection={(selectedItem, index) => {
