@@ -15,27 +15,30 @@ function ListingDetailsScreen({ route, navigation }) {
   return (
     <View>
       <ScrollView>
-      <Image
-        style={styles.image}
-        preview={{ uri: listing.images[0].thumbnailUrl }}
-        tint="light"
-        uri={listing.images[0].url}
-      />
-      <View style={styles.detailsContainer}>
-        <Text style={styles.title}>{listing.title}</Text>
-        <Text style={styles.price}>Rs.{route.params.price} Per Hr</Text>
-        <Text style={styles.price}>
-          12 Slots avaialable, 2 Two Wheeler, 3 Small Car, 5 Sedan, 2 SUV
-        </Text>
-        <View style={styles.userContainer}>
-          <ListItem
-            image={require("../assets/rajesh.jpg")}
-            title={user.name}
-            subTitle="Go ahead with booking "
-            onPress={() => navigation.navigate(routes.SPOT_BOOKING, {parkingPlace:listing.title, rate:route.params.price, selectedVehicle:route.params.selectedVehicle })}
-          />
+        <Image
+          style={styles.image}
+          preview={{ uri: listing.images[0].thumbnailUrl }}
+          tint="light"
+          uri={listing.images[0].url}
+        />
+        <View style={styles.detailsContainer}>
+          <Text style={styles.title}>{listing.title}</Text>
+          <Text style={styles.price}>Rs.{route.params.price} Per Hr</Text>
+          <Text style={styles.price}>
+            10 Slots avaialable, 2 Two Wheeler, 3 Small Car, 5 Sedan, 2 SUV
+            {user.name}
+          </Text>
+          <View style={styles.userContainer}>
+            <ListItem
+              image={user.name === "Snehal"
+                ? require("../assets/snehal.jpg")
+                : require("../assets/rajesh.jpg")}
+              title={user.name}
+              subTitle="Go ahead with booking "
+              onPress={() => navigation.navigate(routes.SPOT_BOOKING, { parkingPlace: listing.title, rate: route.params.price, selectedVehicle: route.params.selectedVehicle, location:listing.location })}
+            />
+          </View>
         </View>
-      </View>
       </ScrollView>
     </View>
   );

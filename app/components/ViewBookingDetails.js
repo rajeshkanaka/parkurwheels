@@ -1,11 +1,9 @@
 import { useState } from 'react';
 import { Modal, View, TouchableOpacity, StyleSheet, Text, Image } from 'react-native';
 import colors from "../config/colors";
-import ModalView from "./Modal";
+import ActivityIndicator from "../components/ActivityIndicator";
 
-function ViewBookingDetails({ bookingDetails, setModalVisible, modalVisible }) {
-
-    const [successModal, setSuccessModal] = useState(false);
+function ViewBookingDetails({ bookingDetails, setModalVisible, modalVisible, setSuccessModal, successModal }) {
 
     return (
         <View style={styles.centeredView}>
@@ -16,29 +14,39 @@ function ViewBookingDetails({ bookingDetails, setModalVisible, modalVisible }) {
             >
                 <View style={styles.centeredView}>
                     <View style={styles.modalView}>
-                        <Text style={styles.modalText}>Awesome! You're done parking</Text>
-                        <View style={{ flexDirection: 'row', width:150 }}>
+                        <ActivityIndicator image={require("../assets/animations/congratulations.json")} visible={true} />
+                        <Text style={{ ...styles.modalText, textAlign: 'center', fontSize: 18 }}>Awesome! You're done parking</Text>
+                        <View style={styles.horizontalLine} />
+                        <View style={{ flexDirection: 'row', width: 150, marginLeft: 10 }}>
                             <View style={{ flexDirection: 'column' }}>
-                                <Text style={styles.modalText}>Booked Space:</Text>
+                                <Text style={{ ...styles.modalText, textAlign: "left" }}>Booked Space:</Text>
+                            </View>
+                            <View style={{ flexDirection: 'column', marginLeft: 30 }}>
+                                <Text style={{ ...styles.modalText }}>{bookingDetails.parkingPlace}</Text>
+                            </View>
+                        </View>
+                        <View style={styles.horizontalLine} />
+                        <View style={{ flexDirection: 'row', width: 150, marginLeft: 10 }}>
+                            <View style={{ flexDirection: 'column' }}>
+
                                 <Text style={styles.modalText}>Check-In Date :</Text>
                                 <Text style={styles.modalText}>Check-In Time :</Text>
                                 <Text style={styles.modalText}>Vehicle: </Text>
                                 <Text style={styles.modalText}>Total: </Text>
                             </View>
-                            <View style={{ flexDirection: 'column' }}>
-                            <Text style={styles.modalText}>{bookingDetails.parkingPlace}</Text>
-                                <Text style={styles.modalText}>Check-In Date :</Text>
-                                <Text style={styles.modalText}>Check-In Time :</Text>
+                            <View style={{ flexDirection: 'column', marginLeft: 30 }}>
+
+                                <Text style={styles.modalText}>{bookingDetails.bookingDate}</Text>
+                                <Text style={styles.modalText}>{bookingDetails.bookingTime}</Text>
                                 <Text style={styles.modalText}>{bookingDetails.selectedVehicle}</Text>
                                 <Text style={styles.modalText}>{bookingDetails.total} </Text>
                             </View>
                         </View>
-                        <ModalView successModal={successModal} setSuccessModal={setSuccessModal} />
                         <TouchableOpacity
-                            style={{ ...styles.confirmButton, alignSelf: 'center' }}
-                            onPress={() => setSuccessModal(true)}
+                            style={styles.confirmButton}
+                            onPress={() => { setSuccessModal(!successModal); setModalVisible(!modalVisible) }}
                         >
-                            <Text style={styles.buttonText}>Proceed to payment</Text>
+                            <Text style={styles.buttonText}>Pay Up</Text>
                         </TouchableOpacity>
 
                     </View>
@@ -53,14 +61,13 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-
     },
     modalView: {
         backgroundColor: "white",
-        height: 250,
+        height: 300,
         borderRadius: 20,
         padding: 30,
-        //alignItems: "center",
+        // alignItems: "center",
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -77,7 +84,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width: 200,
         height: 40,
-        backgroundColor: colors.medium,
+        backgroundColor: '#5C55B9',
+        alignSelf: 'center',
     },
     buttonText: {
         color: colors.white,
@@ -86,14 +94,16 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     modalText: {
-        textAlign: "center",
-        fontSize: 20,
+        // textAlign: "center",
+        fontSize: 16,
         // fontWeight:'bold',
+        color: colors.black,
     },
     horizontalLine: {
         borderWidth: 0.5,
         borderColor: colors.black,
         width: 300,
+        margin: 10,
     },
 });
 

@@ -1,11 +1,14 @@
 import { Modal, View, TouchableOpacity, StyleSheet, Text, Image } from 'react-native';
 import colors from "../config/colors";
 import ActivityIndicator from "../components/ActivityIndicator";
+import openMap, { createOpenLink } from 'react-native-open-maps';
+import { useState } from 'react';
 
-function ModalComponent({ successModal, setSuccessModal }) {
+function ModalComponent({ successModal, setSuccessModal, location }) {
 
     return (
         <View style={styles.centeredView}>
+
             <Modal
                 animationType="slide"
                 transparent={true}
@@ -14,10 +17,13 @@ function ModalComponent({ successModal, setSuccessModal }) {
                 <View style={styles.centeredView}>
                     <View style={styles.modalView}>
                         <Text style={styles.modalText}>Space Successfully Booked</Text>
-                        <ActivityIndicator image={require("../assets/animations/done.json")} visible={true}/>
+                        <ActivityIndicator image={require("../assets/animations/done.json")} visible={true} />
                         <TouchableOpacity
                             style={styles.confirmButton}
-                            onPress={() => setSuccessModal(!successModal)}
+                            onPress={() => {
+                                setSuccessModal(!successModal);
+                                openMap({ latitude: location.latitude, longitude: location.longitude , zoom: 20 })
+                            }}
                         >
                             <Text style={styles.buttonText}>Show on map</Text>
                         </TouchableOpacity>
@@ -38,7 +44,7 @@ const styles = StyleSheet.create({
     },
     modalView: {
         backgroundColor: "white",
-        height:250,
+        height: 250,
         borderRadius: 20,
         padding: 35,
         alignItems: "center",
@@ -50,7 +56,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 4,
         elevation: 5,
-        justifyContent:'space-between',
+        justifyContent: 'space-between',
     },
     confirmButton: {
         borderRadius: 20,
@@ -66,11 +72,11 @@ const styles = StyleSheet.create({
         textTransform: "uppercase",
         fontWeight: "bold",
         textAlign: 'center',
-      },
+    },
     modalText: {
         textAlign: "center",
-        fontSize:20,
-        fontWeight:'bold',
+        fontSize: 20,
+        fontWeight: 'bold',
     },
 });
 
