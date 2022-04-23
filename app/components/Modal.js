@@ -22,7 +22,8 @@ function ModalComponent({ successModal, setSuccessModal, location }) {
                             style={styles.confirmButton}
                             onPress={() => {
                                 setSuccessModal(!successModal);
-                                openMap({ latitude: location.latitude, longitude: location.longitude , zoom: 20 })
+                                console.log(location)
+                                openMap({ latitude: location.latitude, longitude: location.longitude , zoom: 20, navigate:true, start:"My Location", end:{latitude:location.longitude,longitude:location.longitude}})
                             }}
                         >
                             <Text style={styles.buttonText}>Show on map</Text>
