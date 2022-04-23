@@ -30,7 +30,7 @@ function ListingsScreen({ route, navigation }) {
     <Screen style={styles.screen}>
       <FlatList
         data={listings}
-        keyExtractor={(listing) => listing.id.toString()}
+        keyExtractor={(listing,index) => (listing.id!=undefined)?listing.id.toString():index}
         renderItem={({ item }) => (
           <Card
             title={item.title}
